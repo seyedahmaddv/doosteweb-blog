@@ -5,7 +5,13 @@ import Image from 'next/image'
 import { Post } from '@/types'
 import { notFound } from 'next/navigation'
 
-export default async function PostPage({ params }: { params: { slug: string } }) {
+type PostPageProps = {
+    params: {
+      slug: string
+    }
+  }
+
+export default async function PostPage({ params }: PostPageProps) {
     try {
         // دیکد کردن اسلاگ
         const decodedSlug = decodeURIComponent(params.slug)
