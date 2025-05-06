@@ -34,7 +34,7 @@ export default async function PostPage({ params }: { params: { slug: string } })
                 <PortableText value={post.body} />
             </div>
         )
-    } catch (error) {
+    } catch {
         return notFound()
     }
 }

@@ -1,5 +1,3 @@
-// app/page.tsx
-import Image from 'next/image'
 import Footer from './components/Footer'
 import ContactForm from './components/ContactForm'
 import TabalePrice from './components/TabalePrice'
