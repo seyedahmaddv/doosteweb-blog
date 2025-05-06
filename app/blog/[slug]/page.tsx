@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { Post } from '@/types'
 import { notFound } from 'next/navigation'
 
-type PostPageProps = {
+interface PostPageProps  {
     params: {
       slug: string
     }
