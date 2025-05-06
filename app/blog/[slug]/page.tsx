@@ -12,24 +12,24 @@ export async function generateStaticParams() {
     }))
 }
 
-// Updated interface to match Next.js 15 requirements
-type PostPageProps = {
-  params: {
-    slug: string
-  }
-}
-
-export default async function PostPage({ params }: PostPageProps) {
+// تعریف مستقیم پارامترها در Next.js 15
+export default async function PostPage({ 
+  params 
+}: { 
+  params: Promise<{ slug: string }> | { slug: string }
+}) {
   try {
-    const decodedSlug = decodeURIComponent(params.slug)
+    // await کردن params قبل از استفاده از آن
+    const resolvedParams = await params;
+    const decodedSlug = decodeURIComponent(resolvedParams.slug);
 
     // لاگ برای دیباگ
-    console.log('Decoded slug:', decodedSlug)
+    console.log('Decoded slug:', decodedSlug);
 
-    const post: Post = await getPostBySlug(decodedSlug)
+    const post: Post = await getPostBySlug(decodedSlug);
 
     if (!post) {
-      return notFound()
+      return notFound();
     }
 
     return (
@@ -52,7 +52,7 @@ export default async function PostPage({ params }: PostPageProps) {
       </div>
     )
   } catch (error) {
-    console.error('Error fetching post:', error)
-    return notFound()
+    console.error('Error fetching post:', error);
+    return notFound();
   }
 }

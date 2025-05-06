@@ -81,8 +81,10 @@ export default function Example() {
           <div className="flex items-center gap-x-6">
             <Link href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">دوست وب</span>
-              <img
+              <Image 
                 className="h-8 w-auto"
+                width={100}
+                height={100}
                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                 alt=""
               />
