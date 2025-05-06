@@ -1,4 +1,4 @@
-import { getPostBySlug, getAllPosts  } from '@/lib/queries'
+import { getPostBySlug, getAllPosts } from '@/lib/queries'
 import { urlFor } from '@/lib/sanity'
 import { PortableText } from '@portabletext/react'
 import Image from 'next/image'
@@ -9,10 +9,14 @@ export async function generateStaticParams() {
     const posts = await getAllPosts()
     return posts.map((post: { slug: { current: string } }) => ({
         slug: post.slug.current,
-      }))
+    }))
 }
-interface PostPageProps {
-  params: { slug: string }
+
+// Updated interface to match Next.js 15 requirements
+type PostPageProps = {
+  params: {
+    slug: string
+  }
 }
 
 export default async function PostPage({ params }: PostPageProps) {
@@ -23,6 +27,10 @@ export default async function PostPage({ params }: PostPageProps) {
     console.log('Decoded slug:', decodedSlug)
 
     const post: Post = await getPostBySlug(decodedSlug)
+
+    if (!post) {
+      return notFound()
+    }
 
     return (
       <div className="max-w-3xl mx-auto p-6">
@@ -43,7 +51,8 @@ export default async function PostPage({ params }: PostPageProps) {
         <PortableText value={post.body} />
       </div>
     )
-  } catch {
+  } catch (error) {
+    console.error('Error fetching post:', error)
     return notFound()
   }
 }
