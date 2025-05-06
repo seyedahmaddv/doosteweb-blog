@@ -14,9 +14,9 @@ export async function generateStaticParams() {
 
 // تعریف مستقیم پارامترها در Next.js 15
 export default async function PostPage({ 
-  params 
-}: { 
-  params: Promise<{ slug: string }> | { slug: string }
+    params,
+}: {
+  params: { slug: string };
 }) {
   try {
     // await کردن params قبل از استفاده از آن
