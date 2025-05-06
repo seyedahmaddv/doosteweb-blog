@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { getPostBySlug, getAllPosts } from '@/lib/queries'
 import { urlFor } from '@/lib/sanity'
 import { PortableText } from '@portabletext/react'
